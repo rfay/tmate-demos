@@ -1,12 +1,5 @@
 name: detached
-on:
-  workflow_dispatch:
-    inputs:
-      debug_enabled:
-        type: boolean
-        description: 'Use tmate detached'
-        required: false
-        default: false
+on: [push]
 
 jobs:
   build:
