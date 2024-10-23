@@ -5,6 +5,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: sudo apt update && sudo apt install lynx
+      - run: |
+          sudo apt-get update && sudo apt-get install -y curl
+          sudo install -m 0755 -d /etc/apt/keyrings
+          curl -fsSL https://pkg.ddev.com/apt/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/ddev.gpg > /dev/null
+          sudo chmod a+r /etc/apt/keyrings/ddev.gpg
+          echo "deb [signed-by=/etc/apt/keyrings/ddev.gpg] https://pkg.ddev.com/apt/ * *" | sudo tee /etc/apt/sources.list.d/ddev.list >/dev/null
+          sudo apt-get update && sudo apt-get install -y ddev
+          mkcert -install
+      - run: |
+          ddev config --auto --php-version=8.3
+          ddev composer create drupal/recommended-project
+          ddev composer require drush/drush
+          ddev config --update
+          ddev restart
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         with:

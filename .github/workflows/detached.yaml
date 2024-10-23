@@ -4,7 +4,7 @@ on:
     inputs:
       debug_enabled:
         type: boolean
-        description: 'Run with manual start'
+        description: 'Run detached'
         required: false
         default: false
 
