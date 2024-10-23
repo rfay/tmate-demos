@@ -4,7 +4,7 @@ on:
     inputs:
       debug_enabled:
         type: boolean
-        description: 'Run detached'
+        description: 'Use tmate detached'
         required: false
         default: false
 
@@ -19,3 +19,6 @@ jobs:
         with:
           limit-access-to-actor: true
           detached: true
+      - run: | 
+          touch ran-something.txt
+          echo "sleeping 30" && sleep 30

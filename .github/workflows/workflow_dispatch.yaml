@@ -1,10 +1,10 @@
-name: workflow dispatch example
+name: basic workflow dispatch example
 on:
   workflow_dispatch:
     inputs:
       debug_enabled:
         type: boolean
-        description: 'Run with manual start'
+        description: 'Run with manual workflow dispatch'
         required: false
         default: false
 

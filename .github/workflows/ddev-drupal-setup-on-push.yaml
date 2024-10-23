@@ -1,4 +1,4 @@
-name: basic push
+name: ddev drupal setup on push
 on: push
 jobs:
   build:
