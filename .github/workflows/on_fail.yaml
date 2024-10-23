@@ -1,12 +1,5 @@
 name: on failure
-on:
-  workflow_dispatch:
-    inputs:
-      debug_enabled:
-        type: boolean
-        description: 'Run failure with tmate manual start'
-        required: false
-        default: false
+on: [push]
 
 jobs:
   build:
@@ -15,8 +8,10 @@ jobs:
       # Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled && failure() }}
+        if: ${{ failure() }}
         with:
           limit-access-to-actor: true
-      - run: sleep 30 && true
+      - run: | 
+          touch i-touched-it.txt
+          sleep 30 && true
       - run: 'false'
